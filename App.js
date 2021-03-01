@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native'
+import { useFonts, Comfortaa_300Light, Comfortaa_500Medium, Comfortaa_700Bold } from '@expo-google-fonts/comfortaa'
+import { Roboto_400Regular, Roboto_300Light, } from '@expo-google-fonts/roboto'
+import Routes from './src/routes';
+import { AuthProvider } from './src/contexts/auth';
 
 export default function App() {
+
+  let [fontsLoaded] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_500Medium,
+    Comfortaa_700Bold,
+    Roboto_400Regular,
+    Roboto_300Light
+  })
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" style={{ flex: 1 }} />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
