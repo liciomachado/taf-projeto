@@ -36,21 +36,25 @@ export default function Exercises({ onClickModal }) {
       </Container.Box>
 
       <Container.Box>
-        <BoxImage resizeMode="contain"
-          source={barra}
-        />
-        <Text>Flexão na Barra</Text>
-        <Text>Estipulado: 11</Text>
-        <TextInput placeholder="Executado:" style={styles.input} />
+        <TouchableOpacity onPress={onClickModal}>
+          <BoxImage resizeMode="contain"
+            source={barra}
+          />
+          <Text>Flexão na Barra</Text>
+          <Text>Estipulado: 11</Text>
+          <TextInput placeholder="Executado:" style={styles.input} />
+        </TouchableOpacity>
       </Container.Box>
 
       <Container.Box>
-        <BoxImage resizeMode="contain"
-          source={corrida}
-        />
-        <Text>Corrida</Text>
-        <Text>Estipulado: 3100</Text>
-        <TextInput placeholder="Executado:" style={styles.input} />
+        <TouchableOpacity onPress={onClickModal}>
+          <BoxImage resizeMode="contain"
+            source={corrida}
+          />
+          <Text>Corrida</Text>
+          <Text>Estipulado: 3100</Text>
+          <TextInput placeholder="Executado:" style={styles.input} />
+        </TouchableOpacity>
       </Container.Box>
     </Container>
   );

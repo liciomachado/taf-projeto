@@ -10,7 +10,7 @@ Container.Button = styled.View`
 `;
 
 Container.Principal = styled.View`
+    flex: 6;
     align-items: center;
     justify-content: center;
-    flex: 6;
 `;
