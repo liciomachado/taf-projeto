@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Text, KeyboardAvoidingView, StyleSheet, Platform } from 'react-native';
-import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, KeyboardAvoidingView, StyleSheet, Platform, TextInput, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import backgroundEB from '../../assets/backgroundEB.jpeg'
 import { Container, Fundo, NameAplication, Inputs } from './styles';
 import { TextInputMask } from 'react-native-masked-text'

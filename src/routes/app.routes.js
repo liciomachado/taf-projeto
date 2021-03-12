@@ -8,13 +8,16 @@ import Profile from '../pages/Profile';
 import Results from '../pages/Results';
 import PhysicalAtivity from '../pages/PhysicalAtivity';
 import FinishPhysicalAtivity from '../pages/FinishPhysicalAtivity';
-import LastTaf from '../pages/LastTaf';
+import Heating from '../pages/Heating';
 
 const RunStack = createStackNavigator();
 
 function RoutesRun() {
     return (
         <RunStack.Navigator initialRouteName="Run">
+            <RunStack.Screen name="Heating" component={Heating} options={{
+                headerShown: false
+            }} />
             <RunStack.Screen name="Run" component={Results} options={{
                 headerShown: false
             }} />

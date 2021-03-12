@@ -1,17 +1,21 @@
 import React from 'react';
-
-import { Text } from 'react-native';
-
+import { Text, TouchableOpacity } from 'react-native';
 import { Container, TextHome } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const MetaHome = () => {
+  const navigation = useNavigation();
+
   return (
     <Container>
-      <TextHome>Indíce atual:</TextHome>
-      <TextHome>Muito Bom</TextHome>
+      <TextHome>Não esqueça do aquecimento!</TextHome>
       <Text>{"\n"}  </Text>
-      <TextHome>Meta:</TextHome>
-      <TextHome>Excelente</TextHome>
+      <TouchableOpacity onPress={() => navigation.navigate('Heating', { tipoExercicio: 1 })}>
+        <TextHome>Dinamico</TextHome>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Heating', { tipoExercicio: 2 })}>
+        <TextHome>Estático</TextHome>
+      </TouchableOpacity>
     </Container>
   );
 };

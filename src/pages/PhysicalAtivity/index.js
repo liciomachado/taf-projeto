@@ -1,29 +1,41 @@
-import React from 'react';
-import { KeyboardAvoidingView, Platform, Text } from 'react-native';
-
-import { Container } from './styles';
-import UserLogged from '../../components/UserLogged';
-import ButtonAplication from '../../components/ButtonAplication'
-import WeakAndDay from '../../components/WeakAndDay';
-import Exercises from '../../components/Exercise';
+import React, { useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
+import ButtonAplication from '../../components/ButtonAplication';
+import Exercises from '../../components/Exercise';
+import ModalDetailsExercise from '../../components/ModalDetailsExercise';
+import UserLogged from '../../components/UserLogged';
+import WeakAndDay from '../../components/WeakAndDay';
+import { Container } from './styles';
+
 
 const PhysicalAtivity = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  function onClickModal() {
+    setShowModal(!showModal);
+  }
+
   return (
     <>
+      {showModal && <ModalDetailsExercise isVisible={showModal}
+        onCancel={() => setShowModal(false)}
+        id={1} />
+      }
       <ScrollView contentContainerStyle={{ flex: 1 }} scrollEnabled={false} >
+
+
         <UserLogged cor='black' />
 
-          <Container.Principal>
-            <WeakAndDay />
+        <Container.Principal>
+          <WeakAndDay />
 
-            <Exercises />
+          <Exercises onClickModal={onClickModal} />
 
-          </Container.Principal>
+        </Container.Principal>
 
-          <Container.Button >
-            <ButtonAplication text="CONCLUIR ATIVIDADE" color="#3FC745" navigateTo="FinishRun" />
-          </Container.Button>
+        <Container.Button >
+          <ButtonAplication text="CONCLUIR ATIVIDADE" color="#3FC745" navigateTo="FinishRun" />
+        </Container.Button>
       </ScrollView>
     </>
   );

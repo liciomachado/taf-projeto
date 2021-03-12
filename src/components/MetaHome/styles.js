@@ -9,4 +9,5 @@ export const TextHome = styled.Text`
     color: #FFF;
     font-family: Comfortaa_500Medium;
     font-size: 36px;
+    text-align: center;
 `;
