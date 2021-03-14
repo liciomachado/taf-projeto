@@ -7,15 +7,19 @@ import abdominalImg from '../../assets/abdominal.png';
 import flexaoImg from '../../assets/flexao.png';
 import barraImg from '../../assets/barra.png';
 import corridaImg from '../../assets/corrida.png';
+import api from '../../services/exercicioService';
 
 export default function Exercises({ onClickModal, navigation }) {
+  const exercicioService = new api();
+
   const [flexao, setFlexao] = useState('');
   const [abdominal, setAbdominal] = useState('');
   const [barra, setBarra] = useState('');
   const [corrida, setCorrida] = useState('');
 
   function onsubmit() {
-    navigation.navigate('FinishRun');
+    exercicioService.exercicioRealizado(flexao);
+    //navigation.navigate('FinishRun');
   }
 
   return (
@@ -30,7 +34,7 @@ export default function Exercises({ onClickModal, navigation }) {
             />
             <Text>Flexão de Braços</Text>
             <Text>Estipulado: 40</Text>
-            <TextInput placeholder="Executado:" style={styles.input} value={flexao} onChangeText={e => setFlexao(e)} keyboardType='numeric' />
+            <TextInput placeholder="Executado:" style={styles.input} value={flexao} onChangeText={e => setFlexao(e)} keyboardType='number-pad' />
           </TouchableOpacity>
         </Container.Box>
         <Container.Box>
@@ -41,7 +45,7 @@ export default function Exercises({ onClickModal, navigation }) {
             />
             <Text>Abdominal</Text>
             <Text>Estipulado: 70</Text>
-            <TextInput placeholder="Executado:" style={styles.input} value={abdominal} onChangeText={e => setAbdominal(e)} keyboardType='numeric' />
+            <TextInput placeholder="Executado:" style={styles.input} value={abdominal} onChangeText={e => setAbdominal(e)} keyboardType='number-pad' />
           </TouchableOpacity>
         </Container.Box>
 
@@ -53,7 +57,7 @@ export default function Exercises({ onClickModal, navigation }) {
             />
             <Text>Flexão na Barra</Text>
             <Text>Estipulado: 11</Text>
-            <TextInput placeholder="Executado:" style={styles.input} value={barra} onChangeText={e => setBarra(e)} keyboardType='numeric' />
+            <TextInput placeholder="Executado:" style={styles.input} value={barra} onChangeText={e => setBarra(e)} keyboardType='number-pad' />
           </TouchableOpacity>
         </Container.Box>
 
@@ -65,7 +69,7 @@ export default function Exercises({ onClickModal, navigation }) {
             />
             <Text>Corrida</Text>
             <Text>Estipulado: 3100</Text>
-            <TextInput placeholder="Executado:" style={styles.input} value={corrida} onChangeText={e => setCorrida(e)} keyboardType='numeric' />
+            <TextInput placeholder="Executado:" style={styles.input} value={corrida} onChangeText={e => setCorrida(e)} keyboardType='number-pad' />
           </TouchableOpacity>
         </Container.Box>
       </Container>

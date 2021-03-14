@@ -1,20 +1,33 @@
 import axios from 'axios'
 
-export const api = axios.create({
+export const httpClient = axios.create({
     baseURL: 'http://localhost:3030'
 })
 
 class ApiService {
 
     constructor() {
-        this.api = api;
+        this.apiurl = httpClient;
     }
 
-    autenticar(usuario) {
-        return this.api.post('/auth', usuario)
+    post(url, objeto) {
+        const requestUrl = `${this.apiurl}${url}`
+        return httpClient.post(requestUrl, objeto);
     }
 
+    put(url, objeto) {
+        const requestUrl = `${this.apiurl}${url}`
+        return httpClient.put(requestUrl, objeto);
+    }
+
+    delete(url) {
+        const requestUrl = `${this.apiurl}${url}`
+        return httpClient.delete(requestUrl);
+    }
+
+    get(url) {
+        const requestUrl = `${this.apiurl}${url}`
+        return httpClient.get(requestUrl);
+    }
 }
-
-
 export default ApiService;
