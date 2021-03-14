@@ -7,7 +7,6 @@ import UserLogged from '../../components/UserLogged';
 import WeakAndDay from '../../components/WeakAndDay';
 import { Container } from './styles';
 
-
 const PhysicalAtivity = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -33,9 +32,9 @@ const PhysicalAtivity = () => {
 
         </Container.Principal>
 
-        <Container.Button >
+        {/* <Container.Button >
           <ButtonAplication text="CONCLUIR ATIVIDADE" color="#3FC745" navigateTo="FinishRun" />
-        </Container.Button>
+        </Container.Button> */}
       </ScrollView>
     </>
   );

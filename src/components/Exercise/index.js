@@ -1,62 +1,78 @@
 import React, { useState } from 'react';
 
-import { Text, StyleSheet } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import { Container, BoxImage } from './styles';
 
-import abdominal from '../../assets/abdominal.png'
-import barra from '../../assets/barra.png'
-import flexao from '../../assets/flexao.png'
-import corrida from '../../assets/corrida.png'
+import abdominalImg from '../../assets/abdominal.png';
+import flexaoImg from '../../assets/flexao.png';
+import barraImg from '../../assets/barra.png';
+import corridaImg from '../../assets/corrida.png';
 
-export default function Exercises({ onClickModal }) {
+export default function Exercises({ onClickModal, navigation }) {
+  const [flexao, setFlexao] = useState('');
+  const [abdominal, setAbdominal] = useState('');
+  const [barra, setBarra] = useState('');
+  const [corrida, setCorrida] = useState('');
+
+  function onsubmit() {
+    navigation.navigate('FinishRun');
+  }
 
   return (
-    <Container>
-      {/* MUDAR FORMA DE VER 2 X 2  */}
-      <Container.Box>
-        <TouchableOpacity onPress={onClickModal}>
-          <BoxImage resizeMode="contain"
-            source={flexao}
-          />
-          <Text>Flexão de Braços</Text>
-          <Text>Estipulado: 40</Text>
-          <TextInput placeholder="Executado:" style={styles.input} />
-        </TouchableOpacity>
-      </Container.Box>
-      <Container.Box>
-        <TouchableOpacity onPress={onClickModal}>
-          <BoxImage resizeMode="contain"
-            source={abdominal}
-          />
-          <Text>Abdominal</Text>
-          <Text>Estipulado: 70</Text>
-          <TextInput placeholder="Executado:" style={styles.input} />
-        </TouchableOpacity>
-      </Container.Box>
+    <>
+      <Container>
+        {/* MUDAR FORMA DE VER 2 X 2  */}
+        <Container.Box>
+          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+            <Image resizeMode="contain"
+              style={styles.img}
+              source={flexaoImg}
+            />
+            <Text>Flexão de Braços</Text>
+            <Text>Estipulado: 40</Text>
+            <TextInput placeholder="Executado:" style={styles.input} value={flexao} onChangeText={e => setFlexao(e)} keyboardType='numeric' />
+          </TouchableOpacity>
+        </Container.Box>
+        <Container.Box>
+          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+            <Image resizeMode="contain"
+              style={styles.img}
+              source={abdominalImg}
+            />
+            <Text>Abdominal</Text>
+            <Text>Estipulado: 70</Text>
+            <TextInput placeholder="Executado:" style={styles.input} value={abdominal} onChangeText={e => setAbdominal(e)} keyboardType='numeric' />
+          </TouchableOpacity>
+        </Container.Box>
 
-      <Container.Box>
-        <TouchableOpacity onPress={onClickModal}>
-          <BoxImage resizeMode="contain"
-            source={barra}
-          />
-          <Text>Flexão na Barra</Text>
-          <Text>Estipulado: 11</Text>
-          <TextInput placeholder="Executado:" style={styles.input} />
-        </TouchableOpacity>
-      </Container.Box>
+        <Container.Box>
+          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+            <Image resizeMode="contain"
+              style={styles.img}
+              source={barraImg}
+            />
+            <Text>Flexão na Barra</Text>
+            <Text>Estipulado: 11</Text>
+            <TextInput placeholder="Executado:" style={styles.input} value={barra} onChangeText={e => setBarra(e)} keyboardType='numeric' />
+          </TouchableOpacity>
+        </Container.Box>
 
-      <Container.Box>
-        <TouchableOpacity onPress={onClickModal}>
-          <BoxImage resizeMode="contain"
-            source={corrida}
-          />
-          <Text>Corrida</Text>
-          <Text>Estipulado: 3100</Text>
-          <TextInput placeholder="Executado:" style={styles.input} />
-        </TouchableOpacity>
-      </Container.Box>
-    </Container>
+        <Container.Box>
+          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+            <Image resizeMode="contain"
+              style={styles.img}
+              source={corridaImg}
+            />
+            <Text>Corrida</Text>
+            <Text>Estipulado: 3100</Text>
+            <TextInput placeholder="Executado:" style={styles.input} value={corrida} onChangeText={e => setCorrida(e)} keyboardType='numeric' />
+          </TouchableOpacity>
+        </Container.Box>
+      </Container>
+      <TouchableOpacity style={styles.button} onPress={onsubmit}>
+        <Text style={{ color: 'white' }}>CONCLUIR ATIVIDADE</Text>
+      </TouchableOpacity>
+    </>
   );
 };
 
@@ -66,5 +82,18 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 3,
     textAlign: 'center',
+  },
+  img: {
+    width: '100%',
+    height: 120,
+    justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: '#3FC745',
+    paddingHorizontal: 80,
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 15,
   }
 })
