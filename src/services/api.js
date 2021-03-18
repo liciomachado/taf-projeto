@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const httpClient = axios.create({
-    baseURL: 'http://localhost:3030'
+    baseURL: 'http://10.0.0.103:80/api'
 })
 
 class ApiService {

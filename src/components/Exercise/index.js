@@ -18,7 +18,7 @@ export default function Exercises({ onClickModal, navigation }) {
   const [corrida, setCorrida] = useState('');
 
   function onsubmit() {
-    exercicioService.exercicioRealizado(flexao);
+    exercicioService.exercicioRealizado({flexao, abdominal, barra, corrida});
     //navigation.navigate('FinishRun');
   }
 

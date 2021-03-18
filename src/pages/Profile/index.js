@@ -15,7 +15,7 @@ export default function Profile() {
       <Content>
         <Gravatar options={{ email: 'licio.machado@hotmail.com', secure: true }} style={styles.avatar} />
         <User>
-          <User.title>{user.name}</User.title>
+          <User.title>{user.nome}</User.title>
           <User.subTitle>licio.machado@hotmail.com</User.subTitle>
         </User>
 

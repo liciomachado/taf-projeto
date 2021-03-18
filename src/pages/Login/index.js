@@ -12,6 +12,9 @@ export default function Login({ navigation }) {
   const [isRegister, setIsRegister] = useState(false);
   const [date, setDate] = useState('');
 
+  const [email, setEmail] = useState('licio.machado@hotmail.com');
+  const [senha, setSenha] = useState('123321');
+
   return (
     <Fundo source={backgroundEB} >
       <ScrollView contentContainerStyle={styles.content} scrollEnabled={isRegister} >
@@ -43,12 +46,12 @@ export default function Login({ navigation }) {
                 <TextInput style={styles.input} placeholder="Gênero (M / F)" />
               </>
             }
-            <TextInput style={styles.input} placeholder="Email" />
-            <TextInput style={styles.input} placeholder="Senha" />
+            <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={e => setEmail(e)} />
+            <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={e => setSenha(e)} />
           </Inputs>
 
           {!isRegister
-            ? <TouchableOpacity style={styles.button} onPress={signIn}>
+            ? <TouchableOpacity style={styles.button} onPress={() => signIn({ email, senha })}>
               <Text style={{ color: '#FFF', fontWeight: 'bold' }}>LOGAR</Text>
             </TouchableOpacity>
             : <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('LastTaf')}>

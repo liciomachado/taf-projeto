@@ -7,8 +7,8 @@ class ExercicioService extends ApiService {
     }
 
     exercicioRealizado(credenciais) {
-        //EXEMPLO PEGANDO TOKEN console.log("Chegou aqui", this.apiurl.defaults.headers['Authorization']);
-        return this.post('/salvar', credenciais)
+        console.log("Chegou aqui", this.apiurl.defaults.headers['Authorization'], credenciais);
+        //return this.post('/salvar', credenciais)
     }
 
     getListaItens() {
