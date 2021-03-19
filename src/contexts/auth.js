@@ -1,8 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
-import * as auth from '../services/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import UsuarioService from '../services/usuarioService'
-import axios from 'axios'
 import { Alert } from 'react-native'
 
 const AuthContext = createContext({ signed: false, user: {} });

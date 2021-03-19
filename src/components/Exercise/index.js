@@ -8,18 +8,27 @@ import flexaoImg from '../../assets/flexao.png';
 import barraImg from '../../assets/barra.png';
 import corridaImg from '../../assets/corrida.png';
 import api from '../../services/exercicioService';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Exercises({ onClickModal, navigation }) {
+export default function Exercises({ onClickModal }) {
+  const navigation = useNavigation();
   const exercicioService = new api();
 
-  const [flexao, setFlexao] = useState('');
-  const [abdominal, setAbdominal] = useState('');
-  const [barra, setBarra] = useState('');
-  const [corrida, setCorrida] = useState('');
+  const [flexao, setFlexao] = useState('40');
+  const [abdominal, setAbdominal] = useState('69');
+  const [barra, setBarra] = useState('11');
+  const [corrida, setCorrida] = useState('3050');
+
+  // useEffect(() => {
+  //   exercicioService.getIndicesNecessarios().then((response) => {
+  //
+  //   })
+  // }, [])
 
   function onsubmit() {
-    exercicioService.exercicioRealizado({flexao, abdominal, barra, corrida});
-    //navigation.navigate('FinishRun');
+    exercicioService.exercicioRealizado({ flexao, abdominal, barra, corrida }).then(response => {
+      navigation.navigate('FinishRun', { resp: response.data })
+    });
   }
 
   return (
