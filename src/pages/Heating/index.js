@@ -1,26 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Easing, Image, Text } from 'react-native';
+import { ActivityIndicator, Button, Easing, Image, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import ButtonAplication from '../../components/ButtonAplication';
 import UserLogged from '../../components/UserLogged';
 import { Container, BoxImage, TextAtividade } from './styles';
 
 import { exercicioEstatico, exercicioDinamico } from '../../assets/aquecimento'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const Heating = ({ route }) => {
     const [duration, setDuration] = useState(0);
     const [totalExercises, settotalExercises] = useState(0);
     const [exercicios, setexercicios] = useState(exercicioEstatico);
+    const [isLoading, setisLoading] = useState(true);
+
     let refCircularProgress;
     let timing = 5 * 1000;
 
     useEffect(() => {
+        setTimeout(() => {
+            setisLoading(!isLoading);
+        }, 500);
+
         console.log(route.params.tipoExercicio);
         route.params.tipoExercicio == 1
             ? setexercicios(exercicioDinamico)
             : setexercicios(exercicioEstatico);
 
     }, [])
+
     useEffect(() => {
         settotalExercises(exercicios.length - 1);
     }, [exercicios]);
@@ -46,6 +54,12 @@ const Heating = ({ route }) => {
 
     return (
         <Container>
+            <Spinner
+                visible={isLoading}
+                textContent={'Carregando...'}
+                textStyle={{color: '#fff'}}
+                customIndicator={<ActivityIndicator color="#00ff00" size="large" />}
+            />
             <UserLogged cor='black' />
             <Container.Principal>
                 <AnimatedCircularProgress

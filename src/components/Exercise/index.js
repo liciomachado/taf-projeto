@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Text, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
 import { Container, BoxImage } from './styles';
 
 import abdominalImg from '../../assets/abdominal.png';
@@ -9,6 +9,7 @@ import barraImg from '../../assets/barra.png';
 import corridaImg from '../../assets/corrida.png';
 import api from '../../services/exercicioService';
 import { useNavigation } from '@react-navigation/native';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Exercises({ onClickModal }) {
   const navigation = useNavigation();
@@ -18,12 +19,13 @@ export default function Exercises({ onClickModal }) {
   const [abdominal, setAbdominal] = useState('69');
   const [barra, setBarra] = useState('11');
   const [corrida, setCorrida] = useState('3050');
+  const [isLoading, setisLoading] = useState(true);
 
-  // useEffect(() => {
-  //   exercicioService.getIndicesNecessarios().then((response) => {
-  //
-  //   })
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      setisLoading(!isLoading);
+    }, 500);
+  }, [])
 
   function onsubmit() {
     exercicioService.exercicioRealizado({ flexao, abdominal, barra, corrida }).then(response => {
@@ -33,6 +35,12 @@ export default function Exercises({ onClickModal }) {
 
   return (
     <>
+      <Spinner
+        visible={isLoading}
+        textContent={'Carregando...'}
+        textStyle={styles.spinnerTextStyle}
+        customIndicator={<ActivityIndicator color="#00ff00" size="large"/>}
+      />
       <Container>
         {/* MUDAR FORMA DE VER 2 X 2  */}
         <Container.Box>
@@ -108,5 +116,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginBottom: 15,
+  },
+  spinnerTextStyle: {
+    color: '#FFF'
   }
 })

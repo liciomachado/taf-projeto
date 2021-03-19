@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
-import ButtonAplication from '../../components/ButtonAplication';
 import Exercises from '../../components/Exercise';
 import ModalDetailsExercise from '../../components/ModalDetailsExercise';
 import UserLogged from '../../components/UserLogged';

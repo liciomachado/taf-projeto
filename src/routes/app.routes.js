@@ -8,7 +8,6 @@ import Profile from '../pages/Profile';
 import Results from '../pages/Results';
 import PhysicalAtivity from '../pages/PhysicalAtivity';
 import FinishPhysicalAtivity from '../pages/FinishPhysicalAtivity';
-import AlternativeFinish from '../pages/AlternativeFinish';
 import Heating from '../pages/Heating';
 
 const RunStack = createStackNavigator();
@@ -25,7 +24,7 @@ function RoutesRun() {
             <RunStack.Screen name="RunAtivity" component={PhysicalAtivity} options={{
                 headerShown: false
             }} />
-            <RunStack.Screen name="FinishRun" component={AlternativeFinish} options={{
+            <RunStack.Screen name="FinishRun" component={FinishPhysicalAtivity} options={{
                 headerShown: false,
                 gestureEnabled: false
             }} />
