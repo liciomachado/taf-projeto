@@ -13,7 +13,6 @@ class ExercicioService extends ApiService {
 
     getIndicesNecessarios(){
         const storagedUser = AsyncStorage.getItem('@RNAuth:user');
-
         return this.apiurl.get(`/exercicio/necessario/${storagedUser.id}`);
     }
 }

@@ -9,11 +9,6 @@ const AuthStack = createStackNavigator();
 const AuthRoutes = () => (
     <AuthStack.Navigator initialRouteName="Login">
         <AuthStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <AuthStack.Screen name="LastTaf" component={LastTaf}
-            options={{
-                headerShown: false,
-                gestureEnabled: false
-            }} />
     </AuthStack.Navigator>
 );
 

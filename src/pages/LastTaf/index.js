@@ -1,11 +1,28 @@
-import React from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text } from 'react-native';
-import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import ExercicioService from '../../services/exercicioService';
+
 import UserLogged from '../../components/UserLogged';
+import { Container, Inputs, TextTaf, SubText } from './styles';
+import { useAuth } from '../../contexts/auth';
 
-import { Container, Inputs, TextTaf,SubText } from './styles';
+export default function LastTaf({ navigation }) {
+  const { updateUserIndiceTaf } = useAuth();
+  const exercicioService = new ExercicioService();
+  const [flexao, setFlexao] = useState('40');
+  const [abdominal, setAbdominal] = useState('69');
+  const [barra, setBarra] = useState('11');
+  const [corrida, setCorrida] = useState('3050');
 
-export default function LastTaf() {
+  function submitTaf({ route }) {
+    exercicioService.exercicioRealizado({ flexao, abdominal, barra, corrida }).then((res) => {
+      Alert.alert("Sucesso", "Dados salvos com sucesso!");
+      navigation.push('Home')
+      updateUserIndiceTaf(res.data.resultadoFinal);
+    })
+  }
+
   return (
     <Container>
       <UserLogged cor='black' />
@@ -16,14 +33,14 @@ export default function LastTaf() {
           style={styles.content}
         >
           <Inputs>
-            <TextTaf>Defina seu ultimo TAF</TextTaf>
-            <TextInput style={styles.input} keyboardType="numeric" placeholder="Corrida 12min" />
-            <TextInput style={styles.input} keyboardType="numeric" placeholder="Flexão de braços" />
-            <TextInput style={styles.input} keyboardType="numeric" placeholder="Abdominal" />
-            <TextInput style={styles.input} keyboardType="numeric" placeholder="Flexão de braços em barra fixa" />
-            <SubText>Defina com a máxima precisão possivel para maior eficacia dos parametros dos exercícios.</SubText>
+            <TextTaf>Defina seu ultimo Teste Fisico</TextTaf>
+            <TextInput style={styles.input} keyboardType="numeric" placeholder="Corrida 12min" value={corrida} onChangeText={e => setCorrida(e)} />
+            <TextInput style={styles.input} keyboardType="numeric" placeholder="Flexão de braços" value={flexao} onChangeText={e => setFlexao(e)} />
+            <TextInput style={styles.input} keyboardType="numeric" placeholder="Abdominal" value={abdominal} onChangeText={e => setAbdominal(e)} />
+            <TextInput style={styles.input} keyboardType="numeric" placeholder="Flexão de braços em barra fixa" value={barra} onChangeText={e => setBarra(e)} />
+            <SubText>Defina com a máxima precisão possivel para maior eficacia de parametro dos exercícios.</SubText>
           </Inputs>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={submitTaf}>
             <Text style={{ color: '#FFF', fontWeight: 'bold' }}>CONFIRMAR</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
@@ -54,6 +71,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: 'center',
     marginLeft: '10%',
-    marginRight: '10%'
+    marginRight: '10%',
+    marginBottom: '10%'
   }
 })

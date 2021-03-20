@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const usuarioService = new UsuarioService();
 
     const [user, setUser] = useState(null);
+    const [indiceTaf, setIndiceTaf] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
             if (storagedUser && storagedToken) {
                 usuarioService.apiurl.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
                 //httpClient.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
-                setUser(storagedUser);
+                setUser(JSON.parse(storagedUser));
                 setLoading(false);
             } else {
                 setLoading(false);
@@ -32,20 +33,17 @@ export const AuthProvider = ({ children }) => {
     async function signIn(usuario) {
         let response;
         usuarioService.authUser(usuario)
-        //axios.post('http://10.0.0.103/api/usuario/auth', usuario)
-        .then(resp => {
-            response = resp.data;
+            .then(resp => {
+                response = resp.data;
+                setIndiceTaf(resp.data.indiceTaf);
+                setUser(response);
+                usuarioService.apiurl.defaults.headers['Authorization'] = `Bearer ${response.token}`;
 
-            setUser(response);
-            //httpClient.defaults.headers['Authorization'] = `Bearer ${response.token}`;
-            usuarioService.apiurl.defaults.headers['Authorization'] = `Bearer ${response.token}`;
-
-            AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response));
-            AsyncStorage.setItem('@RNAuth:token', response.token);
-        }).catch((err) =>{
-            Alert.alert("Erro", "Usuario ou senha incorreta")
-        });
-        //const response = await auth.signIn();
+                AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response));
+                AsyncStorage.setItem('@RNAuth:token', response.token);
+            }).catch((err) => {
+                Alert.alert("Erro", "Usuario ou senha incorreta")
+            });
     }
 
     function signOut() {
@@ -53,8 +51,15 @@ export const AuthProvider = ({ children }) => {
             setUser(null);
         })
     }
+    function updateUserIndiceTaf(indice) {
+        let usuario = user;
+        usuario.indiceTaf = indice;
+        setUser(usuario);
+        setIndiceTaf(indice);
+        AsyncStorage.setItem('@RNAuth:user', JSON.stringify(usuario));
+    }
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, loading, signIn, signOut }}>
+        <AuthContext.Provider value={{ signed: !!user, user, loading, indiceTaf: !!indiceTaf, signIn, signOut, updateUserIndiceTaf }}>
             {children}
         </AuthContext.Provider>
     )

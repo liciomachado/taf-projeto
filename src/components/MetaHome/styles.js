@@ -11,3 +11,10 @@ export const TextHome = styled.Text`
     font-size: 36px;
     text-align: center;
 `;
+
+export const TextTaf = styled.Text`
+    color: red;
+    font-family: Comfortaa_500Medium;
+    font-size: 36px;
+    text-align: center;
+`;

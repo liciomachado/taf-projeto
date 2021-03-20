@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
-import { Text, KeyboardAvoidingView, StyleSheet, Platform, TextInput, TouchableOpacity } from 'react-native';
+import { Text, KeyboardAvoidingView, StyleSheet, Platform, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import backgroundEB from '../../assets/backgroundEB.jpeg'
 import { Container, Fundo, NameAplication, Inputs } from './styles';
 import { TextInputMask } from 'react-native-masked-text'
 import { useAuth } from '../../contexts/auth'
+import UsuarioService from '../../services/usuarioService';
 
 export default function Login({ navigation }) {
+  const usuarioService = new UsuarioService();
   const { signIn } = useAuth();
 
   const [isRegister, setIsRegister] = useState(false);
-  const [date, setDate] = useState('');
 
   const [email, setEmail] = useState('licio.machado@hotmail.com');
   const [senha, setSenha] = useState('123321');
+  const [nome, setNome] = useState('');
+  const [nascimento, setNascimento] = useState('');
+  //GENERO PEGANDO CHAR M / F
+  const [generoChar, setGeneroChar] = useState('');
+
+  function SignUp() {
+    if (generoChar == 'M' || generoChar == 'F') {
+      var genero = generoChar == 'M' ? "MASCULINO" : "FEMININO";
+      usuarioService.NewUser({ email, senha, nome, nascimento, genero }).then((res) => {
+        Alert.alert("Sucesso", "Usuario cadastrado com sucesso!");
+        signIn({email, senha});
+      }).catch((error) => {
+        Alert.alert("Erro", error);
+        console.log(error)
+      })
+    }
+    else {
+      Alert.alert("Genero não Definido", `Por favor, defina Genero por${"\n"} M -> masculino,${"\n"}F -> feminino`);
+    }
+  }
 
   return (
     <Fundo source={backgroundEB} >
@@ -29,21 +50,20 @@ export default function Login({ navigation }) {
           <Inputs>
             {isRegister &&
               <>
-                <TextInput style={styles.input} placeholder="Nome" />
-                <TextInput style={styles.input} placeholder="Graduação" />
+                <TextInput style={styles.input} placeholder="Nome" value={nome} onChangeText={e => setNome(e)} />
                 <TextInputMask
                   type={'datetime'}
-                  value={date}
+                  value={nascimento}
                   placeholder="01/01/0001"
                   options={{
                     format: 'DD/MM/YYYY'
                   }}
                   onChangeText={text => {
-                    setDate(text)
+                    setNascimento(text)
                   }}
                   style={styles.input}
                 />
-                <TextInput style={styles.input} placeholder="Gênero (M / F)" />
+                <TextInput style={styles.input} placeholder="Gênero (M / F)" value={generoChar} onChangeText={e => setGeneroChar(e.toUpperCase())} maxLength={1} />
               </>
             }
             <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={e => setEmail(e)} />
@@ -54,7 +74,7 @@ export default function Login({ navigation }) {
             ? <TouchableOpacity style={styles.button} onPress={() => signIn({ email, senha })}>
               <Text style={{ color: '#FFF', fontWeight: 'bold' }}>LOGAR</Text>
             </TouchableOpacity>
-            : <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('LastTaf')}>
+            : <TouchableOpacity style={styles.button} onPress={SignUp}>
               <Text style={{ color: '#FFF', fontWeight: 'bold' }}>PRÓXIMO</Text>
             </TouchableOpacity>}
           {!isRegister
