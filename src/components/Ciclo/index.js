@@ -1,14 +1,15 @@
 import React from 'react';
-
-import { Text } from 'react-native';
+import { useAuth } from '../../contexts/auth';
 
 import { Container, TextLastTrainne } from './styles';
 
 const Ciclo = () => {
+  const { user } = useAuth();
+
   return (
     <Container>
       <TextLastTrainne>Ultimo Treino</TextLastTrainne>
-      <TextLastTrainne>24/02/2021</TextLastTrainne>
+      <TextLastTrainne>{user.dataUltimoExercicio}</TextLastTrainne>
     </Container>
   );
 };
