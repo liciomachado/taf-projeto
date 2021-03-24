@@ -16,6 +16,8 @@ export const ContainerModal = styled.View`
 `;
 
 export const BoxImage = styled.Image`
-    width: 70%;
-    padding-bottom: 0;
+    width: 100%;
+    height: 200px;
+    justify-content: center;
+    border-radius: 15px;
 `;

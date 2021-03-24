@@ -10,7 +10,7 @@ const UserLogged = ({ cor }) => {
 
   return (
     <Container>
-      <Gravatar options={{ email: 'licio.machado@hotmail.com', secure: true }} style={styles.avatar} />
+      <Gravatar options={{ email: user.email, secure: true }} style={styles.avatar} />
       <User>
         <User.title style={{ color: cor || 'white' }}>{user.nome}</User.title>
         <User.subTitle style={{ color: cor || 'white' }}>{user.email}</User.subTitle>

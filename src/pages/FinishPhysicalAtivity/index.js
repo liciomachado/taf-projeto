@@ -11,7 +11,6 @@ const FinishPhysicalAtivity = ({ navigation, route }) => {
 
   useEffect(() => {
     setresponseTrainne(route.params.resp);
-    console.log(responseTrainne);
   })
 
   return (

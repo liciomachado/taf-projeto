@@ -25,6 +25,7 @@ export const BoxImage = styled.Image`
     
 `;
 export const TextAtividade = styled.Text`
+    text-align: center;
     font-size: 24px;
     font-family: Comfortaa_300Light;
 `;

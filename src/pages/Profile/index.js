@@ -1,49 +1,59 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RNPickerSelect from "react-native-picker-select";
 import { useAuth } from '../../contexts/auth'
 
 import { Text, StyleSheet, View, TextInput, Button } from 'react-native';
 import { Gravatar } from 'react-native-gravatar'
-import { Container, User, Content } from './styles';
+import { Container, User, Content, TextIndice, Settings } from './styles';
 import TrainneWeak from '../../components/TrainneWeak'
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+export const nextIndice = (indice) => {
+  switch (indice) {
+    case "INSUFICIENTE":
+      return "REGULAR";
+    case "REGULAR":
+      return "BOM";
+    case "BOM":
+      return "MUITO BOM";
+    case "MUITO_BOM":
+      return "EXCELENTE";
+    case "EXCELENTE":
+      return "EVOLUIR SEMPRE!";
+    default:
+      return "A DEFINIR";
+  }
+}
 
-export default function Profile() {
+export default function Profile({ navigation }) {
   const { signOut, user } = useAuth();
+  const [meta, setMeta] = useState('');
+
+  useEffect(() => {
+    setMeta(nextIndice(user.indiceTaf));
+  })
 
   return (
     <Container>
+      <Settings>
+        <TouchableOpacity onPress={() => navigation.navigate('AccountConfig')}>
+          <Ionicons name="settings" size={30} color="black" />
+        </TouchableOpacity>
+      </Settings>
       <Content>
-        <Gravatar options={{ email: 'licio.machado@hotmail.com', secure: true }} style={styles.avatar} />
         <User>
+          <Gravatar options={{ email: user.email, secure: true }} style={styles.avatar} />
           <User.title>{user.nome}</User.title>
           <User.subTitle>{user.email}</User.subTitle>
         </User>
 
         <View style={styles.container}>
           <Text>Indíce atual</Text>
-          <RNPickerSelect style={pickerSelectStyles}
-            onValueChange={(value) => console.log(value)}
-            items={[
-              { label: "JavaScript", value: "JavaScript" },
-              { label: "TypeStript", value: "TypeStript" },
-              { label: "Python", value: "Python" },
-              { label: "Java", value: "Java" },
-              { label: "C++", value: "C++" },
-              { label: "C", value: "C" },
-            ]}
-          />
+          <TextIndice>{user.indiceTaf}</TextIndice>
+
           <Text>Meta</Text>
-          <RNPickerSelect style={pickerSelectStyles}
-            onValueChange={(value) => console.log(value)}
-            items={[
-              { label: "JavaScript", value: "JavaScript" },
-              { label: "TypeStript", value: "TypeStript" },
-              { label: "Python", value: "Python" },
-              { label: "Java", value: "Java" },
-              { label: "C++", value: "C++" },
-              { label: "C", value: "C" },
-            ]}
-          />
+          <TextIndice>{meta}</TextIndice>
+
         </View>
       </Content>
       <TrainneWeak cor="#000" />
@@ -62,6 +72,11 @@ const styles = StyleSheet.create({
   },
   picker: {
     borderColor: '#000',
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 2,
   }
 })
 

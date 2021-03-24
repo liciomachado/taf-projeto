@@ -14,8 +14,6 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     if (user.indiceTaf == null) {
       navigation.navigate('LastTaf');
-    } else {
-      console.log('Não é nulo')
     }
   })
 
@@ -29,7 +27,7 @@ const Home = ({ navigation }) => {
         <UserLogged />
 
         <MetaHome />
-        <Ciclo />
+        <Ciclo data={user.dataUltimoExercicio}/>
         <TrainneWeak />
       </Container>
     </Fundo>

@@ -16,11 +16,14 @@ export const AuthProvider = ({ children }) => {
         async function loadStoragedData() {
             const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
             const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
+            const storagedIndiceTaf = await AsyncStorage.getItem('@RNAuth:indiceTaf');
+
 
             if (storagedUser && storagedToken) {
                 usuarioService.apiurl.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
                 //httpClient.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
                 setUser(JSON.parse(storagedUser));
+                setIndiceTaf(JSON.stringify(storagedIndiceTaf));
                 setLoading(false);
             } else {
                 setLoading(false);
@@ -41,6 +44,7 @@ export const AuthProvider = ({ children }) => {
 
                 AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response));
                 AsyncStorage.setItem('@RNAuth:token', response.token);
+                AsyncStorage.setItem('@RNAuth:indiceTaf', resp.data.indiceTaf);
             }).catch((err) => {
                 Alert.alert("Erro", "Usuario ou senha incorreta")
             });
@@ -49,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     function signOut() {
         AsyncStorage.clear().then(() => {
             setUser(null);
-        })
+        }) 
     }
     function updateUserIndiceTaf(indice) {
         let usuario = user;

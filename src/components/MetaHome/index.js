@@ -8,10 +8,6 @@ const MetaHome = () => {
   const navigation = useNavigation();
   const { indiceTaf } = useAuth();
 
-  useEffect(() => {
-    console.log(indiceTaf)
-  }, [])
-
   return (
     <Container>
       <TextHome>Não esqueça do aquecimento!</TextHome>

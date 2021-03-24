@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack'
-import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { CardStyleInterpolators, createStackNavigator, HeaderStyleInterpolators, TransitionSpecs } from '@react-navigation/stack'
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
@@ -10,10 +10,10 @@ import PhysicalAtivity from '../pages/PhysicalAtivity';
 import FinishPhysicalAtivity from '../pages/FinishPhysicalAtivity';
 import Heating from '../pages/Heating';
 import LastTaf from '../pages/LastTaf';
+import AccountConfig from '../pages/AccountConfig';
 
 const RunStack = createStackNavigator();
 function RoutesRun() {
-
     return (
         <RunStack.Navigator initialRouteName="Run">
             <RunStack.Screen name="Heating" component={Heating} options={{
@@ -37,13 +37,13 @@ const HomeStack = createStackNavigator();
 function RoutesHome() {
     return (
         <HomeStack.Navigator initialRouteName="Home">
-            <RunStack.Screen name="Heating" component={Heating} options={{
+            <HomeStack.Screen name="Heating" component={Heating} options={{
                 headerShown: false
             }} />
-            <RunStack.Screen name="Home" component={Home} options={{
+            <HomeStack.Screen name="Home" component={Home} options={{
                 headerShown: false
             }} />
-            <RunStack.Screen name="LastTaf" component={LastTaf}
+            <HomeStack.Screen name="LastTaf" component={LastTaf}
                 options={{
                     headerShown: false,
                     gestureEnabled: false
@@ -51,6 +51,34 @@ function RoutesHome() {
         </HomeStack.Navigator>
     )
 }
+
+const ProfileStack = createStackNavigator();
+function RoutesProfile() {
+    return (
+        <ProfileStack.Navigator initialRouteName="Profile" mode='modal'>
+            <ProfileStack.Screen name="Profile" component={Profile} options={{
+                title: 'Perfil',
+                headerShown: false
+            }} />
+            <ProfileStack.Screen name="AccountConfig" component={AccountConfig}
+                options={{
+                    //headerShown: false,
+                    headerLeft: () => <MaterialIcons name="keyboard-arrow-down" size={36} color="#76AFCD" />,
+                    headerTintColor: '#76AFCD',
+                    title: 'Configurações',
+                    cardStyle: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)'
+                    },
+                    headerStyle: {
+                        backgroundColor: 'transparent'
+                    },
+                    cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+                    headerStyleInterpolator: HeaderStyleInterpolators.forFade,
+                }} />
+        </ProfileStack.Navigator>
+    )
+}
+
 
 const Tab = createBottomTabNavigator();
 export default function AppRoutes() {
@@ -85,7 +113,7 @@ export default function AppRoutes() {
             <Tab.Screen name="Run" component={RoutesRun} options={{
                 title: "Praticar",
             }} />
-            <Tab.Screen name="Profile" component={Profile} options={{
+            <Tab.Screen name="Profile" component={RoutesProfile} options={{
                 title: "Perfil",
             }} />
         </Tab.Navigator>

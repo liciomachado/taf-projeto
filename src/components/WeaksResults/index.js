@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Container, TextWeak } from './styles';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { useNavigation } from '@react-navigation/native';
 
-import ButtonAplication from '../ButtonAplication';
 import WeakAndDay from '../WeakAndDay';
+import { nextIndice } from '../../pages/Profile'
+import { useAuth } from '../../contexts/auth';
 
 const WeaksResults = () => {
+  const { user } = useAuth();
   const navigation = useNavigation();
+  const [meta, setMeta] = useState('');
+
+  useEffect(() => {
+    setMeta(nextIndice(user.indiceTaf))
+  })
 
   return (
     <>
@@ -34,12 +41,10 @@ const WeaksResults = () => {
             }
           </AnimatedCircularProgress>
           <TextWeak.day>Próximo nível:</TextWeak.day>
-          <TextWeak.day>Excelente</TextWeak.day>
+          <TextWeak.day>{meta}</TextWeak.day>
 
         </Container.Principal>
-        {/* <Container.Button >
-          <ButtonAplication text="INICIAR ATIVIDADE" color="#3FC745" navigateTo="RunAtivity" />
-        </Container.Button> */}
+
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RunAtivity')}>
           <Text style={{ color: 'white' }}>INICIAR ATIVIDADE</Text>
         </TouchableOpacity>

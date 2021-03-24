@@ -9,7 +9,7 @@ const Ciclo = () => {
   return (
     <Container>
       <TextLastTrainne>Ultimo Treino</TextLastTrainne>
-      <TextLastTrainne>{user.dataUltimoExercicio}</TextLastTrainne>
+      <TextLastTrainne>{user.dataUltimoExercicio || "-"}</TextLastTrainne>
     </Container>
   );
 };

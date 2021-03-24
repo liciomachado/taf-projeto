@@ -67,7 +67,7 @@ export default function Login({ navigation }) {
               </>
             }
             <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={e => setEmail(e)} />
-            <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={e => setSenha(e)} />
+            <TextInput style={styles.input} placeholder="Senha" value={senha} onChangeText={e => setSenha(e)} secureTextEntry={true}/>
           </Inputs>
 
           {!isRegister

@@ -22,7 +22,6 @@ const Heating = ({ route }) => {
             setisLoading(!isLoading);
         }, 500);
 
-        console.log(route.params.tipoExercicio);
         route.params.tipoExercicio == 1
             ? setexercicios(exercicioDinamico)
             : setexercicios(exercicioEstatico);

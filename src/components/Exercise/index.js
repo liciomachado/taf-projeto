@@ -44,7 +44,7 @@ export default function Exercises({ onClickModal }) {
       <Container>
         {/* MUDAR FORMA DE VER 2 X 2  */}
         <Container.Box>
-          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => onClickModal(0)} style={{ alignItems: 'center' }}>
             <Image resizeMode="contain"
               style={styles.img}
               source={flexaoImg}
@@ -55,7 +55,7 @@ export default function Exercises({ onClickModal }) {
           </TouchableOpacity>
         </Container.Box>
         <Container.Box>
-          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => onClickModal(1)} style={{ alignItems: 'center' }}>
             <Image resizeMode="contain"
               style={styles.img}
               source={abdominalImg}
@@ -67,7 +67,7 @@ export default function Exercises({ onClickModal }) {
         </Container.Box>
 
         <Container.Box>
-          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => onClickModal(2)} style={{ alignItems: 'center' }}>
             <Image resizeMode="contain"
               style={styles.img}
               source={barraImg}
@@ -79,7 +79,7 @@ export default function Exercises({ onClickModal }) {
         </Container.Box>
 
         <Container.Box>
-          <TouchableOpacity onPress={onClickModal} style={{ alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => onClickModal(3)} style={{ alignItems: 'center' }}>
             <Image resizeMode="contain"
               style={styles.img}
               source={corridaImg}
