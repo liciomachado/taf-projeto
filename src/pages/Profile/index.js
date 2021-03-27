@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import RNPickerSelect from "react-native-picker-select";
 import { useAuth } from '../../contexts/auth'
 
-import { Text, StyleSheet, View, TextInput, Button } from 'react-native';
+import { Text, StyleSheet, View, TextInput, Button,TouchableOpacity } from 'react-native';
 import { Gravatar } from 'react-native-gravatar'
 import { Container, User, Content, TextIndice, Settings } from './styles';
 import TrainneWeak from '../../components/TrainneWeak'
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 export const nextIndice = (indice) => {
   switch (indice) {
     case "INSUFICIENTE":

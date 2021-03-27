@@ -62,8 +62,18 @@ export const AuthProvider = ({ children }) => {
         setIndiceTaf(indice);
         AsyncStorage.setItem('@RNAuth:user', JSON.stringify(usuario));
     }
+
+    function changeUser(userChanged) {
+        let usuario = user;
+        usuario.nome = userChanged.nome;
+        usuario.email = userChanged.email;
+        usuario.nascimento = userChanged.nascimento;
+        usuario.genero = userChanged.genero;
+        setUser(usuario);
+        AsyncStorage.setItem('@RNAuth:user', JSON.stringify(usuario));
+    }
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, loading, indiceTaf: !!indiceTaf, signIn, signOut, updateUserIndiceTaf }}>
+        <AuthContext.Provider value={{ signed: !!user, user, loading, indiceTaf: !!indiceTaf, signIn, signOut, updateUserIndiceTaf, changeUser }}>
             {children}
         </AuthContext.Provider>
     )

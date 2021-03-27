@@ -11,6 +11,7 @@ import FinishPhysicalAtivity from '../pages/FinishPhysicalAtivity';
 import Heating from '../pages/Heating';
 import LastTaf from '../pages/LastTaf';
 import AccountConfig from '../pages/AccountConfig';
+import Weak from '../pages/Weak';
 
 const RunStack = createStackNavigator();
 function RoutesRun() {
@@ -43,6 +44,9 @@ function RoutesHome() {
             <HomeStack.Screen name="Home" component={Home} options={{
                 headerShown: false
             }} />
+            <HomeStack.Screen name="WeakResults" component={Weak} options={{
+                headerShown: false
+            }} />
             <HomeStack.Screen name="LastTaf" component={LastTaf}
                 options={{
                     headerShown: false,
@@ -65,7 +69,7 @@ function RoutesProfile() {
                     //headerShown: false,
                     headerLeft: () => <MaterialIcons name="keyboard-arrow-down" size={36} color="#76AFCD" />,
                     headerTintColor: '#76AFCD',
-                    title: 'Configurações',
+                    title: 'CONFIGURAÇÕES',
                     cardStyle: {
                         backgroundColor: 'rgba(255, 255, 255, 0.95)'
                     },

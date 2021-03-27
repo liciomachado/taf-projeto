@@ -1,13 +1,16 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { Container, TextWeakCicle, Content, ButtonWeak, Text } from './styles';
 
 const TrainneWeak = ({ cor }) => {
+  const navigation = useNavigation();
+
   return (
     <Container>
       <TextWeakCicle style={{ color: cor || 'white' }}>SEMANA DE CICLO</TextWeakCicle>
       <Content>
-        <ButtonWeak>
+        <ButtonWeak onPress={() => navigation.navigate('WeakResults')}>
           <Text>01</Text>
         </ButtonWeak>
         <ButtonWeak>

@@ -14,6 +14,10 @@ class UsuarioService extends ApiService {
     NewUser(credenciais) {
         return this.apiurl.post('usuario/save', credenciais)
     }
+
+    changeUser(credenciais) {
+        return this.apiurl.put('usuario/updateuser', credenciais);
+    }
 }
 
 export default UsuarioService;
