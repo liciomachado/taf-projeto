@@ -12,16 +12,20 @@ const WeaksResults = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [meta, setMeta] = useState('');
+  const [semana, setSemana] = useState(0);
+  const [dia, setDia] = useState(0);
 
   useEffect(() => {
     setMeta(nextIndice(user.indiceTaf))
+    setSemana(parseInt(user.diaDesafio / 7) + 1);
+    setDia(parseInt(user.diaDesafio % 7) + 1);
   })
 
   return (
     <>
       <Container>
         <Container.Principal>
-          <WeakAndDay />
+          <WeakAndDay dia={dia} semana={semana} />
 
           <AnimatedCircularProgress
             size={200}

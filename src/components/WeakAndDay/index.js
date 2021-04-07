@@ -3,11 +3,12 @@ import React from 'react';
 
 import { Container, TextWeak } from './styles';
 
-const WeakAndDay = () => {
+const WeakAndDay = ({semana, dia}) => {
+
   return (
     <Container>
-      <TextWeak>Semana 5</TextWeak>
-      <TextWeak.day>Dia 03</TextWeak.day>
+      <TextWeak>Semana {semana}</TextWeak>
+      <TextWeak.day>Dia 0{dia}</TextWeak.day>
     </Container>
   );
 };

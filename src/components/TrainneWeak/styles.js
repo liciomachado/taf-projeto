@@ -15,7 +15,6 @@ export const TextWeakCicle = styled.Text`
     font-size: 14px;
 `;
 export const ButtonWeak = styled.TouchableOpacity`
-    background-color: #3FC745;
     padding: 5px;
     border-radius: 10px;
     margin: 2px;

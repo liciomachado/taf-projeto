@@ -15,6 +15,14 @@ class ExercicioService extends ApiService {
         const storagedUser = AsyncStorage.getItem('@RNAuth:user');
         return this.apiurl.get(`/exercicio/necessario/${storagedUser.id}`);
     }
+
+    getSemanaDeExercicio(semana){
+        return this.apiurl.get(`/exercicio/semana/${semana}`);
+    }
+
+    getSemanasConcluidas() {
+        return this.apiurl.get('/exercicio/semanas-concluidas')
+    }
 }
 
 export default ExercicioService;
